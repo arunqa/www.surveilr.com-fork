@@ -1,0 +1,11 @@
+ok 1 —  › [FII-OPSU-FN-ADR-0001] - Check whether the Audit link is redirected to the corresponding page or not
+ok 2 —  › [FII-OPSU-FN-ADR-0002] - Check whether the Audit page contains AICPA, HIPAA, Netspective, HITRUST CSF, Cybersecurity Maturity Model Certification (CMMC) & Together.Health Security Assessment (THSA) list or not
+ok 3 —  › [FII-OPSU-FN-ADR-0003] - Check whether the AICPA link is redirected to the corresponding page or not
+ok 4 —  › [FII-OPSU-FN-ADR-0004] - Check whether the Audit - AICPA page contain SOC2 TYPE1 and SOC2 TYPE2 title,image, description,see Details and control count or not
+ok 5 —  › [FII-OPSU-FN-ADR-0005] - Verify that choosing the See Details option of SOC2 Type I leads to the respective details page
+ok 6 —  › [FII-OPSU-FN-ADR-0006] - Verify that choosing the See Details option of SOC2 Type II leads to the respective details page
+ok 7 —  › [FII-OPSU-FN-ADR-0007] - Check whether the SOC2 TYPE 1 link is redirected to the corresponding page or not
+ok 8 —  › [FII-OPSU-FN-ADR-0008] - Ensure that the session name field within the "Create new audit session" popup adheres to a uniform character limit
+ok 9 —  › [FII-OPSU-FN-ADR-0009] - Check whether the "Create New Session" option working or not
+ok 10 —  › [FII-OPSU-FN-ADR-0010] - Check whether the session name, Tenant, Overall progress, Due Date and Action of various session are displayed in tabular format or not
+1..10
