@@ -1,5 +1,5 @@
 ---
-test_case_id: FII-OPSU-FN-ADR-0007
+test_case_id: FII-OPSU-ADR-FN-TC-0007
 title: Check whether the SOC2 TYPE 1 link is redirected to the corresponding page or not.
 description: "Verify that the SOC2 TYPE 1 link is redirected to the corresponding page or not."
 priority: High

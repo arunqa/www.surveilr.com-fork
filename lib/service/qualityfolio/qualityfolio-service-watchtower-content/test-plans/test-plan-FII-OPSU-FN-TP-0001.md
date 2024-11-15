@@ -1,12 +1,12 @@
 ---
-test_plan_id: FII-OPSU-FN-TPN-0001
+test_plan_id: FII-OPSU-FN-TP-0001
 title: Opsfolio Suite Test Plan for Release v1.0
 description: "This plan outlines the testing strategy and cases for Release v1.0."
 created_by: "QA Lead"
 created_date: "2023-11-13"
 status: In Progress
 suites:
-  - FII-OPSU-FN-TST-0001
+  - FII-OPSU-FN-TS-0001
 tags:
   - release_v1.0
   - full_regression of create session
@@ -20,7 +20,7 @@ This test plan defines the scope, approach, resources, and schedule for testing 
 
 ## Included Suites
 
-- **[Audit session creation by Tenent Admin](../test-suites/test-suite-FII-OPSU-FN-TST-0001.md)** (FII-OPSU-FN-TST-0001)
+- **[Audit session creation by Tenent Admin](../test-suites/test-suite-FII-OPSU-FN-TS-0001.md)** (FII-OPSU-FN-TS-0001)
 
 ## Objectives
 

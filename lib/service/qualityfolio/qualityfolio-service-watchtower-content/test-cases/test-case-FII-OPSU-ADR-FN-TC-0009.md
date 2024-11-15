@@ -1,5 +1,5 @@
 ---
-test_case_id: FII-OPSU-FN-ADR-0009
+test_case_id: FII-OPSU-ADR-FN-TC-0009
 title: Check whether the "Create New Session" option working or not.
 description: "Verify that the Create New Session option working or not."
 priority: High

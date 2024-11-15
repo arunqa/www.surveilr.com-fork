@@ -1,7 +1,7 @@
 ---
-result_id: FII-OPSU-FN-TRM-0009
-test_case_id: FII-OPSU-FN-ADR-0008
-test_plan_id: FII-OPSU-FN-TPN-0001
+result_id: FII-OPSU-FN-RES-0005
+test_case_id: FII-OPSU-ADR-FN-TC-0004
+test_plan_id: FII-OPSU-FN-TP-0001
 execution_date: "2023-11-13"
 executed_by: "QA Engineer"
 status: Passed
@@ -11,7 +11,7 @@ attachments:
   - "screenshots/login_successful.png"
 ---
 
-# Test Result for FII-OPSU-FN-ADR-0008: Ensure that the session name field within the "Create new audit session" popup adheres to a uniform character limit.
+# Test Result for FII-OPSU-ADR-FN-TC-0004: Check whether the Audit - AICPA page contains SOC2 TYPE1 and SOC2 TYPE2 title, image, description, see Details and control count or not.
 
 ## Execution Details
 

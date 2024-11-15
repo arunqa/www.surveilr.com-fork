@@ -1,7 +1,7 @@
 ---
-result_id: FII-OPSU-FN-TRM-0008
-test_case_id: FII-OPSU-FN-ADR-0007
-test_plan_id: FII-OPSU-FN-TPN-0001
+result_id: FII-OPSU-FN-RES-0006
+test_case_id: FII-OPSU-ADR-FN-TC-0005
+test_plan_id: FII-OPSU-FN-TP-0001
 execution_date: "2023-11-13"
 executed_by: "QA Engineer"
 status: Passed
@@ -11,7 +11,7 @@ attachments:
   - "screenshots/login_successful.png"
 ---
 
-# Test Result for FII-OPSU-FN-ADR-0007: Check whether the SOC2 TYPE 1 link is redirected to the corresponding page or not.
+# Test Result for FII-OPSU-ADR-FN-TC-0005: Verify that choosing the "See Details" option of SOC2 Type I leads to the respective details page.
 
 ## Execution Details
 

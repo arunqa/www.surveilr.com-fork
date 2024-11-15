@@ -1,5 +1,5 @@
 ---
-test_case_id: FII-OPSU-FN-ADR-0008
+test_case_id: FII-OPSU-ADR-FN-TC-0008
 title: Ensure that the session name field within the "Create new audit session" popup adheres to a uniform character limit.
 description: "Verify that the session name field within the Create new audit session popup adheres to a uniform character limit."
 priority: High

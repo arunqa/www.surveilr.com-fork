@@ -1,7 +1,7 @@
 ---
-result_id: FII-OPSU-FN-TRM-0003
-test_case_id: FII-OPSU-FN-ADR-0002
-test_plan_id: FII-OPSU-FN-TPN-0001
+result_id: FII-OPSU-FN-RES-0011
+test_case_id: FII-OPSU-ADR-FN-TC-0010
+test_plan_id: FII-OPSU-FN-TP-0001
 execution_date: "2023-11-13"
 executed_by: "QA Engineer"
 status: Passed
@@ -11,7 +11,7 @@ attachments:
   - "screenshots/login_successful.png"
 ---
 
-# Test Result for FII-OPSU-FN-ADR-0002: Check whether the Audit page includes AICPA, HIPAA, Netspective, HITRUST CSF, Cybersecurity Maturity Model Certification (CMMC), and Together.Health Security Assessment (THSA) listings.
+# Test Result for FII-OPSU-ADR-FN-TC-0010: Check whether the session name, Tenent, Overall progress, Due Date. Actions of various sessions are displayed in tabular format or not.
 
 ## Execution Details
 

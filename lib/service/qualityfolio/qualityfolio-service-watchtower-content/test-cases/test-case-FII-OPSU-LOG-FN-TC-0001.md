@@ -1,5 +1,5 @@
 ---
-test_case_id: FII-OPSU-FN-LOG-0001
+test_case_id: FII-OPSU-LOG-FN-TC-0001
 title: Verify that a user can log in successfully with valid credentials.
 description: "Verify that a user can log in successfully with valid credentials."
 priority: High

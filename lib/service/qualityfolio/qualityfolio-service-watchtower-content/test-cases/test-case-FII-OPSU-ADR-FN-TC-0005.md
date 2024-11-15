@@ -1,5 +1,5 @@
 ---
-test_case_id: FII-OPSU-FN-ADR-0005
+test_case_id: FII-OPSU-ADR-FN-TC-0005
 title: Verify that choosing the "See Details" option of SOC2 Type I leads to the respective details page.
 description: "Verify that choosing the See Details option of SOC2 Type I leads to the respective details page."
 priority: High

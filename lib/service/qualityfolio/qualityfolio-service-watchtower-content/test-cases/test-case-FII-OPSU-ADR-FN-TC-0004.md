@@ -1,5 +1,5 @@
 ---
-test_case_id: FII-OPSU-FN-ADR-0004
+test_case_id: FII-OPSU-ADR-FN-TC-0004
 title: Check whether the Audit - AICPA page contains SOC2 TYPE1 and SOC2 TYPE2 title, image, description, see Details and control count or not.
 description: "Verify that the Audit - AICPA page contains SOC2 TYPE1 and SOC2 TYPE2 title, image, description, see Details and control count or not."
 priority: High

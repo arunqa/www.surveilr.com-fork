@@ -1,5 +1,5 @@
 ---
-test_case_id: FII-OPSU-FN-ADR-0010
+test_case_id: FII-OPSU-ADR-FN-TC-0010
 title: Check whether the session name, Tenent, Overall progress, Due Date. Actions of various sessions are displayed in tabular format or not.
 description: "Verify that the session name, Tenent, Overall progress, Due Date. Actions of various sessions are displayed in tabular format or not."
 priority: High

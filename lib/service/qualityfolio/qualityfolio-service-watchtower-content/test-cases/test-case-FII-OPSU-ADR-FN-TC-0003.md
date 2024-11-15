@@ -1,5 +1,5 @@
 ---
-test_case_id: FII-OPSU-FN-ADR-0003
+test_case_id: FII-OPSU-ADR-FN-TC-0003
 title: Check whether the AICPA link is redirected to the corresponding page or not.
 description: "Verify that the AICPA link is redirected to the corresponding page or not."
 priority: High

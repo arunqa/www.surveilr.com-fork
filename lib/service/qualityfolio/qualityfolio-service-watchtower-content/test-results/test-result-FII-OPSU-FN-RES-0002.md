@@ -1,7 +1,7 @@
 ---
-result_id: FII-OPSU-FN-TRM-0001
-test_case_id: FII-OPSU-FN-LOG-0001
-test_plan_id: FII-OPSU-FN-TPN-0001
+result_id: FII-OPSU-FN-RES-0002
+test_case_id: FII-OPSU-ADR-FN-TC-0001
+test_plan_id: FII-OPSU-FN-TP-0001
 execution_date: "2023-11-13"
 executed_by: "QA Engineer"
 status: Passed
@@ -11,7 +11,7 @@ attachments:
   - "screenshots/login_successful.png"
 ---
 
-# Test Result for FII-OPSU-FN-LOG-0001: Verify that a user can log in successfully with valid credentials.
+# Test Result for FII-OPSU-ADR-FN-TC-0001: Verify whether the Audit link redirects to the appropriate page.
 
 ## Execution Details
 

@@ -1,5 +1,5 @@
 ---
-test_case_id: FII-OPSU-FN-ADR-0001
+test_case_id: FII-OPSU-ADR-FN-TC-0001
 title: Verify whether the Audit link redirects to the appropriate page.
 description: "Verify that Audit link is redirected to the corresponding page or not."
 priority: High
