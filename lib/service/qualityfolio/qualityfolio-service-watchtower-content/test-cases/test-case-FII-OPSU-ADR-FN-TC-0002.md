@@ -8,7 +8,7 @@ preconditions:
   - "Log in to the Opsfolio application as an admin user."
 created_by: "QA Engineer"
 created_date: "2023-11-13"
-suite_id: TS_0007
+suite_id: FII-OPSU-FN-TS-0001
 tags:
   - login
   - functional

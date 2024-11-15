@@ -5,7 +5,7 @@ description: "This plan outlines the testing strategy and cases for Release v1.0
 created_by: "QA Lead"
 created_date: "2023-11-13"
 status: In Progress
-suites:
+suite_id:
   - FII-OPSU-FN-TS-0001
 tags:
   - release_v1.0
