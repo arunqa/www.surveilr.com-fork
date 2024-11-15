@@ -212,16 +212,16 @@ If you want to group results for specific runs (e.g., a specific build or sprint
 
 ```markdown
 ---
-test_run_id: TRUN-005
+test_run_id: TR-005
 title: Test Run for Sprint 5
 test_plan_id: TP-001
 execution_date: "2023-11-13"
 executed_by: "QA Team"
 status: Completed
 results:
-  - TR-001
-  - TR-002
-  - TR-003
+  - RES-001
+  - RES-002
+  - RES-003
 tags:
   - sprint_5
   - regression
@@ -259,36 +259,37 @@ This test run covers the testing efforts for Sprint 5 as part of Release v1.0.
 
 ## Commands
 
-### 1. Ingest Markdown Content
+### Ingest Markdown Content
 ```bash
-surveilr ingest fs -d /qualityfolio-service-content
+surveilr ingest files -r qualityfolio-service-watchtower-content
 ```
-Extracts and refines email content, making it accessible for reporting and analysis.
+Post-ingestion, `surveilr` is no longer required, the `qualityfolio-service-content` directory can be
+ignored, only `sqlite3` is required because all content is in the
+`resource-surveillance.sqlite.db` SQLite database which does not require any
+other dependencies.
 
-## SQL Queries
+## Start surveilr Web UI
+Post-ingestion, `surveilr` is no longer required, the `ingest` directory can be
+ignored, only `sqlite3` is required because all content is in the
+`resource-surveillance.sqlite.db` SQLite database which does not require any
+other dependencies.
 
-### Count Test Cases by Status
-```sql
-SELECT status, COUNT(*) FROM qsw_test_case GROUP BY status;
-```
-
-### Recent Failures in a Test Run
-```sql
-SELECT test_case_fii, result, run_date 
-FROM qsw_test_result 
-WHERE result = 'fail' 
-AND test_run_fii = 'TR-001'
-ORDER BY run_date DESC;
-```
-
-## Web UI Setup
-
-### Start surveilr Web UI
 ```bash
-deno run -A ./package.sql.ts | surveilr shell   # Console mode
-surveilr shell ./package.sql.ts                 # Alternative start
+# load the "Console" and other menu/routing utilities plus FHIR Web UI (both are same, just run one)
+$ deno run -A ./package.sql.ts | surveilr shell   # option 1 (same as option 2)
+$ surveilr shell ./package.sql.ts                 # option 2 (same as option 1)
+
+# start surveilr web-ui in "watch" mode to re-load package.sql.ts automatically
+$ ../../std/surveilrctl.ts dev
+# browse http://localhost:9000/ to see surveilr web UI
+# browse http://localhost:9000/qltyfolio/info-schema.sql to see DMS-specific schema
 ```
-- **Access:** `http://localhost:9000/` for the surveilr web interface.
+
+Once you apply `stateless.sql` you can ignore that files and all content will be
+accessed through views or `*.cached` tables in
+`resource-surveillance.sqlite.db`. At this point you can rename the SQLite
+database file, archive it, use in reporting tools, DBeaver, DataGrip, or any
+other SQLite data access tools.
 
 ## Testing and Automation
 
