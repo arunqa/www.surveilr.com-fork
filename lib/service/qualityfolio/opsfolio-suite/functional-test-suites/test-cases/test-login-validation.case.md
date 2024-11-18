@@ -12,9 +12,9 @@ Verify that a user can log in successfully with valid credentials.
 ### Steps
 
 1. Choose the organization from drop down.
-2. Enter the username "opsfolio" in the username field.
-2. Enter the password "suite" in the password field.
-3. Click on the "Login" button.
+2. Enter the valid username in the username field.
+3. Enter the vaild password in the password field.
+4. Click on the "Login" button.
 
 ### Expected Outcome
 
