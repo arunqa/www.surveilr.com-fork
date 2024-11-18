@@ -1,7 +1,7 @@
 ---
 name: "Opsfolio Suite"
 description: "Opsfolio is a compliance platform designed to simplify IT security and regulatory requirements for software development teams. It automates evidence collection for compliance standards like SOC 2, FedRAMP, and HIPAA, while integrating seamlessly with engineering workflows. The suite offers features like real-time monitoring, automated reporting, and agent-based evidence collection to ensure audit readiness and continuous compliance."
-created_by: "qa-manager@example.com"
+created_by: "admin@opsfolio.com"
 created_at: "2024-01-01"
 last_updated_at: "2024-01-15"
 status: "Active"
