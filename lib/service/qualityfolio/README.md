@@ -1,267 +1,182 @@
 
-# Qualityfolio Service Specification
+The `Qualityfolio` specification introduces a structured, Markdown-driven approach to organizing, managing, and auditing test management artifacts. It is designed to integrate seamlessly with `surveilr`, allowing ingested content to be queried, tracked, and audited, while providing a web-based UI for dashboards and reporting similar to industry-standard test management systems.
 
-The Qualityfolio Service Specification provides a comprehensive test management system designed within the **surveilr** platform. This open-source, compliance-oriented system leverages structured Markdown files, SQL querying, and a web-based UI, making it a robust alternative for quality and compliance-focused test management.
+- Qualityfolio is code-first ("test management as code" or TMaC)
+- Qualityfolio supports GitOps and doing test management via CI/CD-based test automation
+- Qualityfolio also supports manual executions of test cases
+- Qualityfolio uses `surveilr` for RSSD-based content storage and Web UI
 
-## Overview
+### Content Hierarchy
 
-### Purpose
-The Qualityfolio Service aims to:
-- Offer a secure, compliant, and customizable test management solution.
-- Store test data in Markdown for traceable and easily integrable documentation.
-- Use SQL for advanced querying, analytics, and reporting in a web UI.
+The `Qualityfolio` directory structure is designed to accommodate varying levels of complexity, from standalone test cases to hierarchical organizations with projects, suites, and test case groups.
 
-### Key Components
-- **Markdown-Based Test Storage**: Stores test narratives in Markdown for direct access and version control.
-- **Foreign Integration Identifier (FII) System**: Unique codes enabling comprehensive traceability.
-- **surveilr Ingestion Pipeline**: Automates Markdown and other test data ingestion into surveilr.
-- **RSDD-Based SQLite Query Interface**: Facilitates real-time analytics for test management and tracking.
-- **Web UI for Test Management**: Provides a user-friendly test management functionalities within surveilr.
+#### Root Directory: `/qualityfolio`
+- **Purpose**: Serves as the entry point for all test management content.
+- **Contents**:
+  - `README.md` *(optional)*: Provides a general description of the `Qualityfolio` directory's purpose and usage.
+  - `<project>`: Subdirectories representing individual projects. If projects are not required, test cases can be placed directly under `/qualityfolio`.
 
-## Structure
+### Project Structure: `/qualityfolio/<project>`
+- **Purpose**: Represents a project, grouping related test suites and test cases.
+- **Contents**:
+  - `qf-project.md` *(optional)*: The project definition file containing metadata and descriptions. If absent, the directory name is used as the project name.
+  - `<test-suite>`: Subdirectories representing test suites within the project. If suites are not required, test cases can be placed directly under `<project>`.
 
-### Directory Structure
-The test-related data is stored within `/qualityfolio-service-content`, organized the structure:
+### Test Suite Structure: `/qualityfolio/<project>/<test-suite>`
+- **Purpose**: Groups test cases and test case groups for modular testing.
+- **Contents**:
+  - `qf-suite.md` *(optional)*: The test suite definition file containing metadata and descriptions.
+  - `<test-case-group>`: Subdirectories representing groups of test cases within the suite.
+  - `<test-case>.case.md`: Individual test cases within the suite, described using Markdown.
+  - `<test-case>_test.ts`: optional Deno-based unit test that can execute and produce results in TAP (for automation) or other formats. See `lib/assurance` examples.
+  - `<test-case>.surveilr[json].sh`: optional executable which executes the test and generates capturable JSON when ingested by surveilr
+  - `<test-case>.surveilr[tap].sh`: optional executable which executes the test and generates capturable TAP when ingested by surveilr
 
-```
-/qualityfolio-service-content
-   ├── test-plans
-   │   └── {test-plan-FII-code}.md
-   ├── test-suites
-   │   └── {test-suite-FII-code}.md
-   ├── test-cases
-   │   └── {test-case-FII-code}.md
-   ├── test-runs
-   │   └── {test-run-FII-code}.md
-   └── test-results
-       └── {test-result-FII-code}.md
-```
+### Test Case Group Structure: `/qualityfolio/<project>/<test-suite>/<test-case-group>`
+- **Purpose**: Allows further categorization of test cases within a suite.
+- **Contents**:
+  - `qf-case-group.md` *(optional)*: The test case group definition file containing metadata and descriptions.
+  - `<test-case>.case.md`: Markdown files for individual test cases under the group.
+  - `<test-case>.surveilr[json].sh`: optional executable which executes the test and generates capturable JSON when ingested by surveilr
+  - `<test-case>.surveilr[tap].sh`: optional executable which executes the test and generates capturable TAP when ingested by surveilr
 
-### Example Format
----
+### Test Case Files Proposal (to be extensively edited by @arunqa and QA engineers)
 
-## 1. **Test Suites**
+1. **Test Case File**: `<test-case>.case.md`
+   - **Purpose**: Defines a single test case, including test steps, expected outcomes, and metadata.
+   - **Structure**:
+     ```markdown
+     ---
+     FII: "TC-001"
+     title: "Test Login Functionality"
+     created_by: "tester@example.com"
+     created_at: "2024-01-01"
+     tags: ["authentication", "login"]
+     priority: "High"
+     ---
+     ### Description
+     Verifies that users can log in with valid credentials.
 
-A test suite groups related test cases. Here’s how a sample test suite might look in Markdown.
+     ### Steps
+     1. Navigate to the login page.
+     2. Enter valid username and password.
+     3. Click "Login."
 
-**File: `{test-suite-FII-code}.md`**
+     ### Expected Outcome
+     - User is successfully logged in and redirected to the dashboard.
 
-```markdown
----
-suite_id: TS-001
-title: User Login Suite
-description: "This suite contains tests for verifying the user login functionality."
-created_by: "QA Engineer"
-created_date: "2023-11-13"
-tags:
-  - login
-  - authentication
----
+     ### Expected Results
+     <query-result>select x from y</query-result>
+     ```
 
-# User Login Test Suite
+The `<query-result>` assumes that test runs and results are ingested via `surveilr` and there are SQL views available to access the results in the RSSD.
 
-This suite tests the core functionality of the user login feature, including error handling and valid login scenarios.
+2. **Test Run Summary**: `<test-case>.run.md`
+   - **Purpose**: Captures the summary of all runs for a test case.
+   - **Structure**:
+     ```markdown
+     ---
+     FII: "TR-001"
+     test_case_fii: "TC-001"
+     run_date: "2024-01-15"
+     environment: "Production"
+     ---
+     ### Run Summary
+     - Status: Passed
+     - Notes: All steps executed successfully.
+     ```
 
-## Test Cases
+3. **Test Result File**: `<test-case>.run-<run>.result.*`
+   - **Purpose**: Stores results for specific runs of a test case.
+   - **Formats**: JSON, TAP (Test Anything Protocol), or other structured formats.
+   - **Example (JSON)**:
+     ```json
+     {
+       "test_case_fii": "TC-001",
+       "run_id": "TR-001",
+       "result": "pass",
+       "steps": [
+         {"step": 1, "result": "pass"},
+         {"step": 2, "result": "pass"},
+         {"step": 3, "result": "pass"}
+       ]
+     }
+     ```
 
-- [TC-001: Login with Valid Credentials](./test_cases/TC-001_login_valid.md)
-- [TC-002: Login with Invalid Password](./test_cases/TC-002_login_invalid.md)
-- [TC-003: Login with Empty Fields](./test_cases/TC-003_login_empty_fields.md)
-```
+### Web UI Integration with `surveilr`
 
----
+The `Qualityfolio` content is ingested into `surveilr` for structured storage and analytics. The resulting data can then be accessed via a web-based dashboard with the following features:
 
-### 2. **Test Cases**
+#### Features of the Web UI
+1. **Dashboard**:
+   - **Metrics**: Displays pass/fail rates, defect counts, and test case coverage by project, suite, or individual cases.
+   - **Filters**: Enables filtering by tags, priorities, or custom fields.
+   - **Charts**: Visualizes trends in testing progress and defect discovery.
 
-Each test case file details the specific steps, expected results, and any necessary prerequisites.
+2. **Test Case Explorer**:
+   - Allows navigation through the `Qualityfolio` hierarchy (projects, suites, groups, cases).
+   - Provides detailed views for each test case, including steps, results, and run history.
 
-**File: `{test-case-FII-code}.md`**
+3. **Test Execution Reports**:
+   - Summarizes execution status for specific runs, showing failures, blocked cases, and defects linked to test results.
 
-```markdown
----
-test_case_id: TC-001
-title: Login with Valid Credentials
-description: "Verify that a user can log in with valid username and password."
-priority: High
-status: Active
-preconditions: 
-  - "User is registered in the system."
-created_by: "QA Engineer"
-created_date: "2023-11-13"
-suite_id: TS-001
-tags:
-  - login
-  - functional
----
+4. **Auditing and Traceability**:
+   - Ensures full traceability of test cases to results using FII codes.
+   - Enables querying historical data for compliance or debugging.
 
-# Login with Valid Credentials
+### Example Simplest Directory Structure
 
-## Preconditions
-
-- User is registered in the system.
-
-## Test Steps
-
-1. Navigate to the login page.
-2. Enter a valid username and password.
-3. Click on the "Login" button.
-
-## Expected Result
-
-- The user is successfully logged in and redirected to the dashboard.
-```
-
----
-
-### 3. **Test Plans**
-
-A test plan may encompass multiple suites or configurations and is designed to document the test strategy.
-
-**File: `{test-plan-FII-code}.md`**
-
-```markdown
----
-test_plan_id: TP-001
-title: Test Plan for Release v1.0
-description: "This plan outlines the testing strategy and cases for Release v1.0."
-created_by: "QA Lead"
-created_date: "2023-11-13"
-status: In Progress
-suites:
-  - TS-001
-  - TS-002
-tags:
-  - release_v1.0
-  - full_regression
----
-
-# Test Plan for Release v1.0
-
-## Overview
-
-This test plan defines the scope, approach, resources, and schedule for testing the Release v1.0.
-
-## Included Suites
-
-- **[User Login Suite](../suites/suite_example.md)** (TS-001)
-- **[Account Management Suite](../suites/suite_account_mgmt.md)** (TS-002)
-
-## Objectives
-
-- Ensure all primary user workflows function as expected.
-- Verify no critical bugs are present.
-- Test across multiple configurations: browser and mobile.
-
-## Schedule
-
-| Phase               | Start Date | End Date |
-|---------------------|------------|----------|
-| Test Preparation    | 2023-10-01 | 2023-10-15 |
-| Test Execution      | 2023-10-16 | 2023-10-30 |
-| Bug Fix Verification| 2023-11-01 | 2023-11-10 |
-| Report              | 2023-11-12 | 2023-11-13 |
+```bash
+/qualityfolio
+  my-test-case.case.md
 ```
 
----
+Project structure
 
-### 4. **Test Results**
-
-Test results can be stored individually for each test case in Markdown, making it easy to record and version control every execution instance.
-
-**File: `{test-result-FII-code}.md`**
-
-```markdown
----
-result_id: TR-001
-test_case_id: TC-001
-test_plan_id: TP-001
-execution_date: "2023-11-13"
-executed_by: "QA Engineer"
-status: Passed
-environment: "Chrome 95, Windows 10"
-notes: "All steps executed as expected. No issues found."
-attachments:
-  - "screenshots/login_successful.png"
----
-
-# Test Result for TC-001: Login with Valid Credentials
-
-## Execution Details
-
-- **Date:** 2023-11-13
-- **Executed By:** QA Engineer
-- **Environment:** Chrome 95, Windows 10
-- **Status:** Passed
-
-## Observations
-
-- All steps executed as expected. User successfully logged in and redirected to the dashboard.
-
-## Attachments
-
-- [Screenshot of successful login](../attachments/screenshots/login_successful.png)
+```bash
+/qualityfolio
+  /qualitfolio/my-project/my-test-case.case.md
 ```
 
----
+Project and suite structure
 
-### 5. **Test Run (Optional)**
-
-If you want to group results for specific runs (e.g., a specific build or sprint), you can create a test run file to track a specific execution batch.
-
-**File: `test_runs/{test-run-FII-code}.md`**
-
-```markdown
----
-test_run_id: TR-005
-title: Test Run for Sprint 5
-test_plan_id: TP-001
-execution_date: "2023-11-13"
-executed_by: "QA Team"
-status: Completed
-results:
-  - RES-001
-  - RES-002
-  - RES-003
-tags:
-  - sprint_5
-  - regression
----
-
-# Test Run for Sprint 5
-
-This test run covers the testing efforts for Sprint 5 as part of Release v1.0.
-
-## Included Results
-
-- **[TC-001: Login with Valid Credentials - Passed](../test_results/TC-001_login_valid_result_2023-11-13.md)**
-- **[TC-002: Login with Invalid Password - Failed](../test_results/TC-002_login_invalid_result_2023-11-13.md)**
-- **[TC-003: Login with Empty Fields - Passed](../test_results/TC-003_login_empty_fields_result_2023-11-13.md)**
+```bash
+/qualityfolio
+  /qualitfolio/my-project-1/my-test-case.case.md
+  /qualitfolio/my-project-2/my-test-suite-1/my-test-case.case.md
+  /qualitfolio/my-project-2/my-test-suite-2/my-test-case.case.md
 ```
 
----
+Project and suite with test case subgroups and subcase structure (arbitrary depth)
 
-## Key Features and Workflow
+```bash
+/qualityfolio
+  /qualitfolio/my-project-1/my-test-case.case.md
+  /qualitfolio/my-project-2/my-test-suite-1/my-test-case.case.md
+  /qualitfolio/my-project-2/my-test-suite-2/my-test-case.case.md
+  /qualitfolio/my-project-3/my-test-suite-3/my-suite-3-group-1/my-test-case.case.md
+  /qualitfolio/my-project-3/my-test-suite-3/my-suite-3-group-2/my-test-case.case.md
+```
 
-### 1. **Ingestion of Markdown and Automation Artifacts**
-   - Automates ingestion of files into the surveilr `uniform_resource` table.
-   - Uses FII codes to link files across test plans, cases, and runs.
+### Example Full Project Structure
 
-### 2. **SQL Query Interface**
-   - Provides SQL schema for querying test metrics, test statuses, and historical data.
-   - Supports advanced queries, including test coverage and defect tracking.
-
-### 3. **surveilr Web UI**
-   - The functionality, including dashboards, test case management, and reporting.
-
-### 4. **Integration and Automation**
-   - CI/CD integration triggers automated tests for continuous feedback.
-   - API endpoints allow integration with automation tools like Playwright and Postman.
-
+```bash
+/qualityfolio
+  /my-project
+    qf-project.md
+    /my-test-suite
+      qf-suite.md
+      /my-test-case-group
+        qf-case-group.md
+        test-login.case.md
+        test-login.run.md
+        test-login.run-1.result.json
+```
 ## Commands
 
 ### Ingest Markdown Content
 ```bash
-surveilr ingest files -r qualityfolio-service-watchtower-content
+surveilr ingest files -r qualityfolio
 ```
 Post-ingestion, `surveilr` is no longer required, the `qualityfolio-service-content` directory can be
 ignored, only `sqlite3` is required because all content is in the
@@ -290,20 +205,3 @@ accessed through views or `*.cached` tables in
 `resource-surveillance.sqlite.db`. At this point you can rename the SQLite
 database file, archive it, use in reporting tools, DBeaver, DataGrip, or any
 other SQLite data access tools.
-
-## Testing and Automation
-
-### Run Tests
-Execute Deno tests to verify Qualityfolio functionality:
-```bash
-deno test -A
-```
-
-This command creates an `assurance` folder with all test-related data and logs.
-
-## Additional Notes
-
-### Integration with Opsfolio
-Qualityfolio aligns with Opsfolio for compliance workflows, supporting high traceability and integrity through SQL-based querying and Markdown documentation. Both systems enable evidence-based management and audit readiness, essential for regulated environments.
-
-This documentation outlines Qualityfolio's structure, components, and workflows, enabling teams to leverage it as a robust, open-source solution for software testing and quality assurance.
