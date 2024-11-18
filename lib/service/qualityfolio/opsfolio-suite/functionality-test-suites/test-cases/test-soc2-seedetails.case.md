@@ -1,26 +1,15 @@
 ---
-test_case_id: FII-OPSU-ADR-FN-TC-0006
+FII: TC-0007
 title: Verify that choosing the "See Details" option of SOC2 TYPE 2 leads to the respective details page.
-description: "Verify that choosing the See Details option of SOC2 TYPE 2 leads to the respective details page."
-priority: High
-status: Active
-preconditions: 
-  - "Log in to the Opsfolio application as an admin user."
-created_by: "QA Engineer"
-created_date: "2023-11-13"
-suite_id: FII-OPSU-FN-TS-0001
-tags:
-  - login
-  - functional
+created_by: "arun-ramanan@netspective.in"
+created_at: "2024-01-01"
+tags: ["audit session", "login"]
+priority: "High"
 ---
+### Description
+Verify that choosing the "See Details" option of SOC2 TYPE 2 leads to the respective details page.
 
-# Verify that choosing the "See Details" option of SOC2 TYPE 2 leads to the respective details page.
-
-## Preconditions
-
-- Log in to the Opsfolio application as an admin user.
-
-## Test Steps
+### Steps
 
 1. Login to the Opsfolio Application
 2. Redirect to the Opsfolio home page and verify
@@ -30,7 +19,9 @@ tags:
 6. Verify the Audit-AICPA page                        
 7. Click on the 'See details' link on the SOC2 type 2 section
 
-## Expected Result
+### Expected Outcome
 
 - System should navigate to SOC2 TYPE2 detail page.
 
+### Expected Results
+<query-result>select x from y</query-result>

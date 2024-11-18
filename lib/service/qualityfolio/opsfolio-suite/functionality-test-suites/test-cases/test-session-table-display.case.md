@@ -1,26 +1,15 @@
 ---
-test_case_id: FII-OPSU-ADR-FN-TC-0010
+FII: TC-0011
 title: Check whether the session name, Tenent, Overall progress, Due Date. Actions of various sessions are displayed in tabular format or not.
-description: "Verify that the session name, Tenent, Overall progress, Due Date. Actions of various sessions are displayed in tabular format or not."
-priority: High
-status: Active
-preconditions: 
-  - "Log in to the Opsfolio application as an admin user."
-created_by: "QA Engineer"
-created_date: "2023-11-13"
-suite_id: FII-OPSU-FN-TS-0001
-tags:
-  - login
-  - functional
+created_by: "arun-ramanan@netspective.in"
+created_at: "2024-01-01"
+tags: ["audit session", "login"]
+priority: "High"
 ---
+### Description
+Check whether the session name, Tenent, Overall progress, Due Date. Actions of various sessions are displayed in tabular format or not.
 
-# Check whether the session name, Tenent, Overall progress, Due Date. Actions of various sessions are displayed in tabular format or not.
-
-## Preconditions
-
-- Log in to the Opsfolio application as an admin user.
-
-## Test Steps
+### Steps
 
 1. Login to the Opsfolio Application               
 2. Redirect to the Opsfolio home page and verify
@@ -31,7 +20,9 @@ tags:
 7. Click on the SOC2 type-1 link                     
 8. Verify and check the various sessions present in the SOC2 type 1 page
 
-## Expected Result
+### Expected Outcome
 
 - The system should display the session name, Tenant, Overall Progress, Due Date, and Actions of various sessions in a tabular format.
 
+### Expected Results
+<query-result>select x from y</query-result>
