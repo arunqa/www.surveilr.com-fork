@@ -1,9 +1,9 @@
 ---
-name: "Opsfolio Workflow Testing Suite"
-description: "Includes test cases to validate all critical workflows of the Opsfolio suite using smoke testing with Admin user access."
+name: "Functional Testing Suite"
+description: "Includes test cases to validate all critical workflows of the Opsfolio suite using functional testing with Admin user access."
 created_by: "qa-opsfolio@example.com"
 created_at: "2024-01-05"
-tags: ["smoke testing", "admin role"]
+tags: ["functional testing", "admin role"]
 linked_requirements: ["REQ-0001", "REQ-0002", "REQ-0003", "REQ-0004"]
 ---
 
