@@ -178,7 +178,7 @@ Project and suite with test case subgroups and subcase structure (arbitrary dept
 ```bash
 surveilr ingest files -r qualityfolio
 ```
-Post-ingestion, `surveilr` is no longer required, the `qualityfolio-service-content` directory can be
+Post-ingestion, `surveilr` is no longer required, the `Qualityfolio` directory can be
 ignored, only `sqlite3` is required because all content is in the
 `resource-surveillance.sqlite.db` SQLite database which does not require any
 other dependencies.
