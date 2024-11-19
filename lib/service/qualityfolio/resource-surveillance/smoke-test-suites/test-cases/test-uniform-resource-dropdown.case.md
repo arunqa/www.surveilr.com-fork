@@ -1,0 +1,30 @@
+---
+FII: TC-0008
+title: Ensure the drop down list details of Unoform Resource.
+created_by: "arun-ramanan@netspective.in"
+created_at: "2024-11-19"
+tags: ["Home", "page"]
+priority: "High"
+---
+### Description
+Ensure that the Uniform Resource dropdown shows the following options correctly
+1.Uniform Resources (IMAP)
+2.Uniform Resources (Files)
+3.Uniform Resource Tables and Views
+
+### Steps
+
+1. Login to the Application
+2. Redirect to the home page.
+3. Click on the Uniform Resources menu.                                          
+4. check whether the below options were listed
+     i.Uniform Resources (IMAP)
+    ii.Uniform Resources (Files)
+   iii.Uniform Resource Tables and Views
+
+### Expected Outcome
+
+- The list should get displayed.
+
+### Expected Results
+<query-result>The dropdown should display the options: Uniform Resources (IMAP), Uniform Resources (Files), Uniform Resource Tables and Views.</query-result>

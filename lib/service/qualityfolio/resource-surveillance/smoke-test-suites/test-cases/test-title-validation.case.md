@@ -1,0 +1,24 @@
+---
+FII: TC-0004
+title: Page tittle validation.
+created_by: "arun-ramanan@netspective.in"
+created_at: "2024-11-19"
+tags: ["Home", "page"]
+priority: "High"
+---
+### Description
+Ensure that text -"Resource Surveillance State Database (RSSD)" visible on the top of the home page
+
+### Steps
+
+1. Login to the Application
+2. Redirect to the Dashboad page.
+3. Check wherther the text -"Resource Surveillance State Database (RSSD)" visible on the top of the page
+
+### Expected Outcome
+
+- The tittle should get loaded.
+
+### Expected Results
+<query-result>The text "Resource Surveillance State Database (RSSD)" should be clearly visible at the top of the homepage.
+.</query-result>
