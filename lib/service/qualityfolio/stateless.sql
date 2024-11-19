@@ -1,3 +1,30 @@
+DROP VIEW IF EXISTS projects;
+CREATE view projects AS
+SELECT DISTINCT 
+    project,
+    REPLACE(
+        UPPER(SUBSTR(substring_text, 1, 1)) || 
+        LOWER(SUBSTR(substring_text, 2, INSTR(substring_text, '-') - 1)) || 
+        UPPER(SUBSTR(substring_text, INSTR(substring_text, '-') + 1, 1)) || 
+        LOWER(SUBSTR(substring_text, INSTR(substring_text, '-') + 2)),
+        '-', ' '
+    ) AS project_name
+FROM (
+    SELECT 
+     SUBSTR(
+        uri, 
+        INSTR(uri, 'qualityfolio-service-content/') + LENGTH('qualityfolio-service-content/'), 
+        INSTR(SUBSTR(uri, INSTR(uri, 'qualityfolio-service-content/') + LENGTH('qualityfolio-service-content/')), '/') - 1
+    ) AS project,
+        SUBSTR(
+            uri, 
+            INSTR(uri, 'qualityfolio-service-content/') + LENGTH('qualityfolio-service-content/'), 
+            INSTR(SUBSTR(uri, INSTR(uri, 'qualityfolio-service-content/') + LENGTH('qualityfolio-service-content/')), '/') - 1
+        ) AS substring_text
+    FROM uniform_resource
+    WHERE uri LIKE '%qualityfolio-service-content/%'
+) AS subquery;
+
 DROP VIEW IF EXISTS test_cases;
 CREATE VIEW test_cases AS
 SELECT 

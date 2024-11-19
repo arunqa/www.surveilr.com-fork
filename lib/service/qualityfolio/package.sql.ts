@@ -3,9 +3,9 @@ import { sqlPageNB as spn } from "./deps.ts";
 import {
   console as c,
   orchestration as orch,
-  shell as sh,
   uniformResource as ur,
 } from "../../std/web-ui-content/mod.ts";
+import { QualityfolioShellSqlPages } from "./custom-shell.ts";
 
 /**
  * These pages depend on ../../std/package.sql.ts being loaded into RSSD (for nav).
@@ -60,7 +60,7 @@ export class QualityfolioSqlPages extends spn.TypicalSqlPageNotebook {
        ORDER BY sibling_order;`;
   }
   @qltyfolioNav({
-    caption: "Qualityfolio",
+    caption: "Projects",
     description: ``,
     siblingOrder: 1,
   })
@@ -73,21 +73,11 @@ export class QualityfolioSqlPages extends spn.TypicalSqlPageNotebook {
             TRUE as sort,
             TRUE as search;
       
-      with test_management as(
-        SELECT 
-    -- Replace hyphen with space and capitalize the first letter of each word
-      upper(substr(replace(folder_name, '-', ' '), 1, 1)) || 
-      upper(substr(replace(folder_name, '-', ' '), 2)) AS title,
-      folder_name  
-    FROM 
-        test_cases
-    GROUP BY 
-        folder_name
-      )
+    
       
       SELECT 
-      '[' || title || '](/qltyfolio/detail.sql?name=' || folder_name || ')' as description_md
-      from test_management
+      '[' || project_name || '](/qltyfolio/detail.sql?name=' || project || ')' as description_md
+      from projects
       
       `;
   }
@@ -137,11 +127,11 @@ export async function SQL() {
         );
       }
     }(),
-    new sh.ShellSqlPages(),
+    new QualityfolioSqlPages(),
     new c.ConsoleSqlPages(),
     new ur.UniformResourceSqlPages(),
-    new orch.OrchestrationSqlPages(),
-    new QualityfolioSqlPages(),
+    new orch.OrchestrationSqlPages(),   
+    new QualityfolioShellSqlPages(),
   );
 }
 
