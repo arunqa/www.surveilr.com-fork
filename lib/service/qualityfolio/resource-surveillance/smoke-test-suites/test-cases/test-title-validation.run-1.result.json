@@ -1,0 +1,12 @@
+{
+  "test_case_id": "test-title-validation",
+  "run_id": "TR-0004",
+  "result": "pass",
+  "steps": [
+    {
+      "title": "RSSD title visibility Check",
+      "step": 1,
+      "result": "pass"
+    }
+  ]
+}

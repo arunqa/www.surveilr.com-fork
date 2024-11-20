@@ -1,0 +1,32 @@
+{
+  "test_case_id": "test-Dashboard-check",
+  "run_id": "TR-0005",
+  "result": "pass",
+  "steps": [
+    {
+      "title": "Dashboard menu tab Check",
+      "step": 1,
+      "result": "pass"
+    },
+    {
+      "title": "Dashboard menu tab Check",
+      "step": 2,
+      "result": "pass"
+    },
+    {
+      "title": "Dashboard menu tab Check",
+      "step": 3,
+      "result": "pass"
+    },
+    {
+      "title": "Dashboard menu tab Check",
+      "step": 4,
+      "result": "pass"
+    },
+    {
+      "title": "Dashboard menu tab Check",
+      "step": 5,
+      "result": "pass"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "test_case_id": "test-logo-validation",
+  "run_id": "TR-0003",
+  "result": "pass",
+  "steps": [
+    {
+      "title": "RSSD logo visibility Check",
+      "step": 1,
+      "result": "pass"
+    }
+  ]
+}
