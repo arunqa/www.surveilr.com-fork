@@ -1,0 +1,27 @@
+{
+  "test_case_id": "test-ur-imap-navigation.case",
+  "run_id": "TR-0009",
+  "result": "pass",
+  "steps": [
+    {
+      "step": 0,
+      "result": "info",
+      "message": "Uniform Resources dropdown options check"
+    },
+    {
+      "step": 1,
+      "result": "pass",
+      "message": "Uniform Resources menu clicked successfully."
+    },
+    {
+      "step": 2,
+      "result": "pass",
+      "message": "Uniform Resources (IMAP) option selected."
+    },
+    {
+      "step": 3,
+      "result": "pass",
+      "message": "Successfully navigated to the Uniform Resources (IMAP) page."
+    }
+  ]
+}

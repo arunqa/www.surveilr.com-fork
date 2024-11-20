@@ -1,0 +1,17 @@
+{
+  "test_case_id": "test-home-tab-navigation.case",
+  "run_id": "TR-0006",
+  "result": "pass",
+  "steps": [
+    {
+      "step": 0,
+      "result": "info",
+      "message": "Home page navigation check"
+    },
+    {
+      "step": 1,
+      "result": "pass",
+      "message": "URL changed as expected."
+    }
+  ]
+}
