@@ -8,11 +8,40 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04, debian-10, debian-11, debian-12, kalilinux/latest]
-        architecture: [x64, arm64]
+        include:
+          - os: ubuntu-18.04
+            architecture: x64
+          - os: ubuntu-18.04
+            architecture: arm64
+          - os: ubuntu-20.04
+            architecture: x64
+          - os: ubuntu-20.04
+            architecture: arm64
+          - os: ubuntu-22.04
+            architecture: x64
+          - os: ubuntu-22.04
+            architecture: arm64
+          - os: debian-10
+            architecture: x64
+          - os: debian-10
+            architecture: arm64
+          - os: debian-11
+            architecture: x64
+          - os: debian-11
+            architecture: arm64
+          - os: debian-12
+            architecture: x64
+          - os: debian-12
+            architecture: arm64
+          - os: kalilinux/latest
+            architecture: x64
+          - os: kalilinux/latest
+            architecture: arm64
+          - os: macos-latest
+            architecture: x64
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -28,12 +57,14 @@ jobs:
           deno --version
 
       - name: Install eget
+        if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'debian') || matrix.os == 'macos-latest'
         run: |
           echo "Installing eget..."
           curl -sSL https://zyedidia.github.io/eget.sh | bash
           sudo mv ./eget /usr/local/bin/
 
       - name: Install or Upgrade surveilr
+        if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'debian') || matrix.os == 'macos-latest'
         run: |
           if command -v surveilr &>/dev/null; then
               echo "surveilr is installed. Upgrading..."
@@ -46,6 +77,23 @@ jobs:
           fi
 
       - name: Run Deno Tests
+        run: |
+          deno test -A ./lib/assurance/admin_test.ts \
+                     ./lib/assurance/functions_test.ts \
+                     ./lib/assurance/imap_test.ts \
+                     ./lib/assurance/orchestration_test.ts \
+                     ./lib/assurance/opendal_integration_test.ts
+
+      - name: Install surveilr for Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          echo "Installing surveilr for Windows..."
+          curl -LO https://opsfolio/releases.opsfolio.com/surveilr.exe
+          move surveilr.exe C:\\Windows\\System32\\surveilr.exe
+          surveilr --version
+
+      - name: Run Deno Tests on Windows
+        if: matrix.os == 'windows-latest'
         run: |
           deno test -A ./lib/assurance/admin_test.ts \
                      ./lib/assurance/functions_test.ts \
