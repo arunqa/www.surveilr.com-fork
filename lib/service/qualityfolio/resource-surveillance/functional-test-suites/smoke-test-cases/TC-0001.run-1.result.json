@@ -1,0 +1,45 @@
+{
+    "test_case_fii": "TC-0001",
+    "title": "URL Load Validation",
+    "status": "passed",
+    "start_time": "2024-12-04T08:45:11.753Z",
+    "end_time": "2024-12-04T08:45:13.250Z",
+    "total_duration": "1.50 seconds",
+    "steps": [
+      {
+        "step": 1,
+        "stepname": "Load-Url",
+        "status": "passed",
+        "start_time": "2024-12-04T08:45:11.762Z",
+        "end_time": "2024-12-04T08:45:13.003Z"
+      },
+      {
+        "step": 2,
+        "stepname": "Navigate to URL",
+        "status": "passed",
+        "start_time": "2024-12-04T08:45:13.014Z",
+        "end_time": "2024-12-04T08:45:13.041Z"
+      },
+      {
+        "step": 3,
+        "stepname": "Wait for page load",
+        "status": "passed",
+        "start_time": "2024-12-04T08:45:13.042Z",
+        "end_time": "2024-12-04T08:45:13.045Z"
+      },
+      {
+        "step": 4,
+        "stepname": "Verify page title",
+        "status": "passed",
+        "start_time": "2024-12-04T08:45:13.047Z",
+        "end_time": "2024-12-04T08:45:13.059Z"
+      },
+      {
+        "step": 5,
+        "stepname": "Close-browser",
+        "status": "passed",
+        "start_time": "2024-12-04T08:45:13.060Z",
+        "end_time": "2024-12-04T08:45:13.270Z"
+      }
+    ]
+  }

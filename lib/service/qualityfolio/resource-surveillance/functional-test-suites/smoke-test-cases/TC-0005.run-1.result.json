@@ -1,0 +1,102 @@
+{
+  "test_case_fii": "TC-0005",
+  "run_id": "TR-0005",
+  "title": "Dashboard Menus Check",
+  "status": "passed",
+  "start_time": "2024-12-04T06:41:09.437Z",
+  "end_time": "2024-12-04T06:41:10.977Z",
+  "total_duration": "1.54 seconds",
+  "steps": [
+    {
+      "step": 1,
+      "stepname": "Load-Url",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:09.449Z",
+      "end_time": "2024-12-04T06:41:10.524Z"
+    },
+    {
+      "step": 2,
+      "stepname": "Count the number of tab icons",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.565Z",
+      "end_time": "2024-12-04T06:41:10.640Z"
+    },
+    {
+      "step": 3,
+      "stepname": "Check the text on tab Home",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.641Z",
+      "end_time": "2024-12-04T06:41:10.687Z"
+    },
+    {
+      "step": 4,
+      "stepname": "Trim and compare text for - Home",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.687Z",
+      "end_time": "2024-12-04T06:41:10.693Z"
+    },
+    {
+      "step": 5,
+      "stepname": "Check the text on tab Docs",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.699Z",
+      "end_time": "2024-12-04T06:41:10.724Z"
+    },
+    {
+      "step": 6,
+      "stepname": "Trim and compare text for - Docs",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.725Z",
+      "end_time": "2024-12-04T06:41:10.730Z"
+    },
+    {
+      "step": 7,
+      "stepname": "Check the text on tab Uniform Resource",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.731Z",
+      "end_time": "2024-12-04T06:41:10.795Z"
+    },
+    {
+      "step": 8,
+      "stepname": "Trim and compare text for - Uniform Resource",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.796Z",
+      "end_time": "2024-12-04T06:41:10.799Z"
+    },
+    {
+      "step": 9,
+      "stepname": "Check the text on tab Console",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.800Z",
+      "end_time": "2024-12-04T06:41:10.825Z"
+    },
+    {
+      "step": 10,
+      "stepname": "Trim and compare text for - Console",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.826Z",
+      "end_time": "2024-12-04T06:41:10.829Z"
+    },
+    {
+      "step": 11,
+      "stepname": "Check the text on tab Orchestration",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.830Z",
+      "end_time": "2024-12-04T06:41:10.852Z"
+    },
+    {
+      "step": 12,
+      "stepname": "Trim and compare text for - Orchestration",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.852Z",
+      "end_time": "2024-12-04T06:41:10.854Z"
+    },
+    {
+      "step": 13,
+      "stepname": "Close-browser",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.854Z",
+      "end_time": "2024-12-04T06:41:11.000Z"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "test_case_fii": "TC-0008",
+  "run_id": "TR-0008",
+  "title": "Uniform Dropdown Validation",
+  "status": "passed",
+  "start_time": "2024-12-04T06:41:10.930Z",
+  "end_time": "2024-12-04T06:41:12.846Z",
+  "total_duration": "1.92 seconds",
+  "steps": [
+    {
+      "step": 1,
+      "stepname": "Load-Url",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.931Z",
+      "end_time": "2024-12-04T06:41:11.582Z"
+    },
+    {
+      "step": 2,
+      "stepname": "Waiting for the Uniform Dropdown Tab to be clickable",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.584Z",
+      "end_time": "2024-12-04T06:41:12.589Z"
+    },
+    {
+      "step": 3,
+      "stepname": "Clicking the Uniform Resource Tab",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:12.591Z",
+      "end_time": "2024-12-04T06:41:12.666Z"
+    },
+    {
+      "step": 4,
+      "stepname": "Checking visibility of expected options",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:12.666Z",
+      "end_time": "2024-12-04T06:41:12.675Z"
+    },
+    {
+      "step": 5,
+      "stepname": "Checking for error occurrence",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:12.676Z",
+      "end_time": "2024-12-04T06:41:12.679Z"
+    },
+    {
+      "step": 6,
+      "stepname": "Close-browser",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:12.680Z",
+      "end_time": "2024-12-04T06:41:12.852Z"
+    }
+  ]
+}

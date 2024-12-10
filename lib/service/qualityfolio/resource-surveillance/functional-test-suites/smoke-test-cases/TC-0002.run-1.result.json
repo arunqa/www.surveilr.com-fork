@@ -1,0 +1,88 @@
+{
+  "test_case_fii": "TC-0002",
+  "run_id": "TR-0002",
+  "title": "Dashboard Load Validation",
+  "status": "passed",
+  "start_time": "2024-12-04T06:41:09.364Z",
+  "end_time": "2024-12-04T06:41:10.904Z",
+  "total_duration": "1.54 seconds",
+  "steps": [
+    {
+      "step": 1,
+      "stepname": "Load-Url",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:09.373Z",
+      "end_time": "2024-12-04T06:41:10.350Z"
+    },
+    {
+      "step": 2,
+      "stepname": "Count dashboard menu items",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.375Z",
+      "end_time": "2024-12-04T06:41:10.470Z"
+    },
+    {
+      "step": 3,
+      "stepname": "Check subtitle: SCF Controls",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.471Z",
+      "end_time": "2024-12-04T06:41:10.576Z"
+    },
+    {
+      "step": 4,
+      "stepname": "Trim and compare text for - SCF Controls",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.578Z",
+      "end_time": "2024-12-04T06:41:10.587Z"
+    },
+    {
+      "step": 5,
+      "stepname": "Check subtitle: Orchestration",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.588Z",
+      "end_time": "2024-12-04T06:41:10.658Z"
+    },
+    {
+      "step": 6,
+      "stepname": "Trim and compare text for - Orchestration",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.660Z",
+      "end_time": "2024-12-04T06:41:10.664Z"
+    },
+    {
+      "step": 7,
+      "stepname": "Check subtitle: Uniform Resource",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.665Z",
+      "end_time": "2024-12-04T06:41:10.684Z"
+    },
+    {
+      "step": 8,
+      "stepname": "Trim and compare text for - Uniform Resource",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.685Z",
+      "end_time": "2024-12-04T06:41:10.686Z"
+    },
+    {
+      "step": 9,
+      "stepname": "Check subtitle: Console",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.687Z",
+      "end_time": "2024-12-04T06:41:10.714Z"
+    },
+    {
+      "step": 10,
+      "stepname": "Trim and compare text for - Console",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.715Z",
+      "end_time": "2024-12-04T06:41:10.717Z"
+    },
+    {
+      "step": 11,
+      "stepname": "Close-browser",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.718Z",
+      "end_time": "2024-12-04T06:41:10.926Z"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "test_case_fii": "TC-0003",
+  "run_id": "TR-0003",
+  "title": "RSSD Logo Visibility",
+  "status": "passed",
+  "start_time": "2024-12-04T06:41:09.358Z",
+  "end_time": "2024-12-04T06:41:11.796Z",
+  "total_duration": "2.44 seconds",
+  "steps": [
+    {
+      "step": 1,
+      "stepname": "Load-Url",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:09.369Z",
+      "end_time": "2024-12-04T06:41:10.442Z"
+    },
+    {
+      "step": 2,
+      "stepname": "Waiting for the logo to load",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.478Z",
+      "end_time": "2024-12-04T06:41:11.486Z"
+    },
+    {
+      "step": 3,
+      "stepname": "Verify app logo visibility",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.487Z",
+      "end_time": "2024-12-04T06:41:11.501Z"
+    },
+    {
+      "step": 4,
+      "stepname": "Checking for error occurrence",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.512Z",
+      "end_time": "2024-12-04T06:41:11.529Z"
+    },
+    {
+      "step": 5,
+      "stepname": "Close-browser",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.530Z",
+      "end_time": "2024-12-04T06:41:11.832Z"
+    }
+  ]
+}

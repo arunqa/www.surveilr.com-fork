@@ -1,0 +1,74 @@
+{
+  "test_case_fii": "TC-0010",
+  "run_id": "TR-0010",
+  "title": "Uniform Resource (File) Navigation",
+  "status": "passed",
+  "start_time": "2024-12-04T06:41:11.459Z",
+  "end_time": "2024-12-04T06:41:14.587Z",
+  "total_duration": "3.13 seconds",
+  "steps": [
+    {
+      "step": 1,
+      "stepname": "Load-Url",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.462Z",
+      "end_time": "2024-12-04T06:41:12.246Z"
+    },
+    {
+      "step": 2,
+      "stepname": "Waiting for the Uniform resource Tab to be clickable",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:12.247Z",
+      "end_time": "2024-12-04T06:41:13.254Z"
+    },
+    {
+      "step": 3,
+      "stepname": "Clicking the Uniform resource Tab",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:13.256Z",
+      "end_time": "2024-12-04T06:41:13.340Z"
+    },
+    {
+      "step": 4,
+      "stepname": "Waiting for the Uniform resource (file) Dropdown Tab to be clickable",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:13.341Z",
+      "end_time": "2024-12-04T06:41:14.348Z"
+    },
+    {
+      "step": 5,
+      "stepname": "Clicking the Uniform Resources (file) link",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:14.349Z",
+      "end_time": "2024-12-04T06:41:14.398Z"
+    },
+    {
+      "step": 6,
+      "stepname": "Waiting for the Page title to be visible",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:14.398Z",
+      "end_time": "2024-12-04T06:41:14.475Z"
+    },
+    {
+      "step": 7,
+      "stepname": "Check if the page title is visible",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:14.476Z",
+      "end_time": "2024-12-04T06:41:14.483Z"
+    },
+    {
+      "step": 8,
+      "stepname": "Checking for errors during IMAP navigation",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:14.486Z",
+      "end_time": "2024-12-04T06:41:14.490Z"
+    },
+    {
+      "step": 9,
+      "stepname": "Close-browser",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:14.490Z",
+      "end_time": "2024-12-04T06:41:14.599Z"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "test_case_fii": "TC-0006",
+  "run_id": "TR-0006",
+  "title": "Home Page Loading",
+  "status": "passed",
+  "start_time": "2024-12-04T06:41:09.416Z",
+  "end_time": "2024-12-04T06:41:11.408Z",
+  "total_duration": "1.99 seconds",
+  "steps": [
+    {
+      "step": 1,
+      "stepname": "Load-Url",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:09.422Z",
+      "end_time": "2024-12-04T06:41:10.326Z"
+    },
+    {
+      "step": 2,
+      "stepname": "Starting Home Page Navigation Check",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.354Z",
+      "end_time": "2024-12-04T06:41:10.354Z"
+    },
+    {
+      "step": 3,
+      "stepname": "Capture current URL",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.355Z",
+      "end_time": "2024-12-04T06:41:10.494Z"
+    },
+    {
+      "step": 4,
+      "stepname": "Clicking the Home tab and waiting for navigation",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.496Z",
+      "end_time": "2024-12-04T06:41:11.168Z"
+    },
+    {
+      "step": 5,
+      "stepname": "Checking for errors during navigation",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.169Z",
+      "end_time": "2024-12-04T06:41:11.173Z"
+    },
+    {
+      "step": 6,
+      "stepname": "Close-browser",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.174Z",
+      "end_time": "2024-12-04T06:41:11.427Z"
+    }
+  ]
+}

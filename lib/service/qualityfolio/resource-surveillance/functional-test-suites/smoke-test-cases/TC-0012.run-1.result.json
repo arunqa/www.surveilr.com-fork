@@ -1,0 +1,53 @@
+{
+  "test_case_fii": "TC-0012",
+  "run_id": "TR-0012",
+  "title": "Console Dropdown Validation",
+  "status": "passed",
+  "start_time": "2024-12-04T06:41:11.835Z",
+  "end_time": "2024-12-04T06:41:13.943Z",
+  "total_duration": "2.11 seconds",
+  "steps": [
+    {
+      "step": 1,
+      "stepname": "Load-Url",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.836Z",
+      "end_time": "2024-12-04T06:41:12.560Z"
+    },
+    {
+      "step": 2,
+      "stepname": "Waiting for the Console Dropdown Tab to be clickable",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:12.562Z",
+      "end_time": "2024-12-04T06:41:13.564Z"
+    },
+    {
+      "step": 3,
+      "stepname": "Clicking the console Tab",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:13.566Z",
+      "end_time": "2024-12-04T06:41:13.666Z"
+    },
+    {
+      "step": 4,
+      "stepname": "Checking visibility of expected options",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:13.668Z",
+      "end_time": "2024-12-04T06:41:13.738Z"
+    },
+    {
+      "step": 5,
+      "stepname": "Checking for error occurrence",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:13.741Z",
+      "end_time": "2024-12-04T06:41:13.745Z"
+    },
+    {
+      "step": 6,
+      "stepname": "Close-browser",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:13.746Z",
+      "end_time": "2024-12-04T06:41:13.956Z"
+    }
+  ]
+}

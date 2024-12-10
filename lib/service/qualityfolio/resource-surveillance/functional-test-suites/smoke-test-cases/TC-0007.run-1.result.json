@@ -1,0 +1,52 @@
+{
+    "test_case_fii": "TC-0007",
+    "title": "Docs Page Loading",
+    "status": "passed",
+    "start_time": "2024-12-04T08:48:19.468Z",
+    "end_time": "2024-12-04T08:48:21.068Z",
+    "total_duration": "1.60 seconds",
+    "steps": [
+      {
+        "step": 1,
+        "stepname": "Load-Url",
+        "status": "passed",
+        "start_time": "2024-12-04T08:48:19.477Z",
+        "end_time": "2024-12-04T08:48:20.087Z"
+      },
+      {
+        "step": 2,
+        "stepname": "Starting Docs Page Navigation Check",
+        "status": "passed",
+        "start_time": "2024-12-04T08:48:20.155Z",
+        "end_time": "2024-12-04T08:48:20.156Z"
+      },
+      {
+        "step": 3,
+        "stepname": "Capture current URL",
+        "status": "passed",
+        "start_time": "2024-12-04T08:48:20.158Z",
+        "end_time": "2024-12-04T08:48:20.248Z"
+      },
+      {
+        "step": 4,
+        "stepname": "Clicking the Doc tab and waiting for navigation",
+        "status": "passed",
+        "start_time": "2024-12-04T08:48:20.249Z",
+        "end_time": "2024-12-04T08:48:20.799Z"
+      },
+      {
+        "step": 5,
+        "stepname": "Checking for errors during navigation",
+        "status": "passed",
+        "start_time": "2024-12-04T08:48:20.801Z",
+        "end_time": "2024-12-04T08:48:20.814Z"
+      },
+      {
+        "step": 6,
+        "stepname": "Close-browser",
+        "status": "passed",
+        "start_time": "2024-12-04T08:48:20.816Z",
+        "end_time": "2024-12-04T08:48:21.096Z"
+      }
+    ]
+  }

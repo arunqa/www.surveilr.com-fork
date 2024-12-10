@@ -1,0 +1,60 @@
+{
+  "test_case_fii": "TC-0004",
+  "run_id": "TR-0004",
+  "title": "Title Validation",
+  "status": "passed",
+  "start_time": "2024-12-04T06:41:09.293Z",
+  "end_time": "2024-12-04T06:41:11.482Z",
+  "total_duration": "2.19 seconds",
+  "steps": [
+    {
+      "step": 1,
+      "stepname": "Load-Url",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:09.301Z",
+      "end_time": "2024-12-04T06:41:10.145Z"
+    },
+    {
+      "step": 2,
+      "stepname": "Waiting for text - Resource Surveillance State Database (RSSD) to load",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:10.200Z",
+      "end_time": "2024-12-04T06:41:11.210Z"
+    },
+    {
+      "step": 3,
+      "stepname": "Verify text - Resource Surveillance State Database (RSSD) visibility",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.210Z",
+      "end_time": "2024-12-04T06:41:11.218Z"
+    },
+    {
+      "step": 4,
+      "stepname": "Log visibility status",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.219Z",
+      "end_time": "2024-12-04T06:41:11.223Z"
+    },
+    {
+      "step": 5,
+      "stepname": "Verify the text content of the selected element",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.225Z",
+      "end_time": "2024-12-04T06:41:11.253Z"
+    },
+    {
+      "step": 6,
+      "stepname": "Checking for error occurrence",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.253Z",
+      "end_time": "2024-12-04T06:41:11.256Z"
+    },
+    {
+      "step": 7,
+      "stepname": "Close-browser",
+      "status": "passed",
+      "start_time": "2024-12-04T06:41:11.257Z",
+      "end_time": "2024-12-04T06:41:11.514Z"
+    }
+  ]
+}
