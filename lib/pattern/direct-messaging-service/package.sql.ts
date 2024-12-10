@@ -7,6 +7,10 @@ import {
   uniformResource as ur,
 } from "../../std/web-ui-content/mod.ts";
 
+const WEB_UI_TITLE: string = "Direct Messaging Service";
+const WEB_UI_LOGO = "dms.png"
+const WEB_UI_FAV = "dms-favicon.ico"
+
 /**
  * These pages depend on ../../std/package.sql.ts being loaded into RSSD (for nav).
  *
@@ -23,7 +27,7 @@ import {
 function dmsNav(route: Omit<spn.RouteConfig, "path" | "parentPath">) {
   return spn.navigationPrime({
     ...route,
-    parentPath: "/dms",
+    parentPath: "dms/index.sql",
   });
 }
 
@@ -36,7 +40,7 @@ export class DirectMessageSqlPages extends spn.TypicalSqlPageNotebook {
   navigationDML() {
     return this.SQL`
       -- delete all /dms-related entries and recreate them in case routes are changed
-      DELETE FROM sqlpage_aide_navigation WHERE parent_path="/dms";
+      DELETE FROM sqlpage_aide_navigation WHERE parent_path=${this.constructHomePath("dms")};
       ${this.upsertNavSQL(...Array.from(this.navigation.values()))}
     `;
   }
@@ -47,37 +51,34 @@ export class DirectMessageSqlPages extends spn.TypicalSqlPageNotebook {
   })
   "dms/index.sql"() {
     return this.SQL`
+    select
+        'text'              as component,
+        'The Direct Secure Messaging Service facilitates the secure exchange of clinical data using the phiMail service. PhiMail is built on the DIRECT protocol, a standardized method for secure email communication in healthcare. This enables seamless and secure transmission of health information. Specifically, this page focuses on the receive module, providing a view of the mailbox within the phiMail service. ' as contents;
       WITH navigation_cte AS (
           SELECT COALESCE(title, caption) as title, description
             FROM sqlpage_aide_navigation
-           WHERE namespace = 'prime' AND path=${this.constructHomePath('dms')}
+           WHERE namespace = 'prime' AND path=${this.constructHomePath("dms")}
       )
       SELECT 'list' AS component, title, description
         FROM navigation_cte;
-      SELECT caption as title,COALESCE(REPLACE(url, 'dms/', ''), REPLACE(path, 'dms/', '')) AS link, 
+      SELECT caption as title,${this.absoluteURL('/')} || COALESCE(url, path) AS link,  
       description
         FROM sqlpage_aide_navigation
-       WHERE namespace = 'prime' AND parent_path = '/dms'
+       WHERE namespace = 'prime' AND parent_path = ${this.constructHomePath("dms")}
        ORDER BY sibling_order;`;
   }
   @dmsNav({
     caption: "Inbox",
-    description: ``,
+    description: `Inbox provides a view of the mail inbox`,
     siblingOrder: 1,
   })
   "dms/inbox.sql"() {
     return this.SQL`
-      select
-    'breadcrumb' as component;
-    select
-        'Home' as title,
-        ${this.absoluteURL('/')} as link;
-    select
-        'Direct Protocol Email System' as title,
-         ${this.absoluteURL('/dms/index.sql')} as link;
-    select
-        'Inbox' as title;
+    
     -- select 'debug' as component, sqlpage.environment_variable('SQLPAGE_SITE_PREFIX');
+    select
+        'text'              as component,
+        'The Inbox is a feature that provides users with a centralized, secure interface for accessing and managing messages received through the phiMail service. It is designed to support efficient and compliant handling of sensitive communications, often related to protected health information (PHI).' as contents;
 
       SELECT 'table' AS component,
             'subject' AS markdown,
@@ -87,7 +88,8 @@ export class DirectMessageSqlPages extends spn.TypicalSqlPageNotebook {
 
       SELECT id,
       "from",
-        '[' || subject || '](' || ${this.absoluteURL('email-detail.sql?id=')} || id || ')' AS "subject",
+        '[' || subject || '](' || ${this.absoluteURL('/dms/email-detail.sql?id=')
+      } || id || ')' AS "subject",
       date
       from inbox
       `;
@@ -100,15 +102,19 @@ export class DirectMessageSqlPages extends spn.TypicalSqlPageNotebook {
     'breadcrumb' as component;
     select
         'Home' as title,
-        ${this.absoluteURL('/')} as link;
+        ${this.absoluteURL("/")} as link;
     select
         'Direct Protocol Email System' as title,
-         ${this.absoluteURL('/dms/index.sql')} as link;
+         ${this.absoluteURL("/dms/index.sql")} as link;
     select
         'inbox' as title,
-         ${this.absoluteURL('/dms/index.sql')} as link;
+         ${this.absoluteURL("/dms/index.sql")} as link;
     select
         "subject" as title from inbox where CAST(id AS TEXT)=CAST($id AS TEXT);
+
+    select
+        'text'              as component,
+        'This page provides the details of a received message, including information about any attachments.' as contents;
 
     select
         'datagrid' as component;
@@ -131,8 +137,8 @@ export class DirectMessageSqlPages extends spn.TypicalSqlPageNotebook {
       SELECT
           CASE
               WHEN attachment_filename LIKE '%.xml' OR attachment_mime_type = 'application/xml'
-              THEN '[' || attachment_filename || '](' || attachment_file_path || ' "download")' || ' | ' || '[View Details](patient-detail.sql?id=' || message_uid || ' "View Details")'
-              ELSE '[' || attachment_filename || '](' || attachment_file_path || ' "download")'
+              THEN '[' || attachment_filename || '](' || ${this.absoluteURL('')} || attachment_file_path || ' "download")' || ' | ' || '[View Details]('||${this.absoluteURL('/dms/patient-detail.sql?id=')} || message_uid || ' "View Details")'
+              ELSE '[' || attachment_filename || '](' || ${this.absoluteURL('')} || attachment_file_path || ' "download")'
           END AS "attachment"
       FROM mail_content_attachment
       WHERE CAST(message_uid AS TEXT) = CAST($id AS TEXT);
@@ -147,13 +153,13 @@ export class DirectMessageSqlPages extends spn.TypicalSqlPageNotebook {
     'breadcrumb' as component;
     SELECT
        'Home' as title,
-       ${this.absoluteURL('/')} as link;
+       ${this.absoluteURL("/")} as link;
     SELECT
         'Direct Protocol Email System' as title,
-        ${this.absoluteURL('/dms/index.sql')} as link;
+        ${this.absoluteURL("/dms/index.sql")} as link;
     SELECT
         'inbox' as title,
-        ${this.absoluteURL('/dms/inbox.sql')} as link;
+        ${this.absoluteURL("/dms/inbox.sql")} as link;
     SELECT
          ${this.absoluteURL('/dms/email-detail.sql?id=')}  || id AS link,
         "subject" as title from inbox where CAST(id AS TEXT)=CAST($id AS TEXT);
@@ -161,7 +167,7 @@ export class DirectMessageSqlPages extends spn.TypicalSqlPageNotebook {
         first_name as title from patient_detail where CAST(message_uid AS TEXT)=CAST($id AS TEXT) ;
 
    SELECT 'html' AS component, '
-  <link rel="stylesheet" href="'||${this.absoluteURL('/assets/style.css')}||'">'
+  <link rel="stylesheet" href="'||${this.absoluteURL("/assets/style.css")}||'">'
   ||'<h2>' || document_title || '</h2>
   <table class="patient-summary">
     <tr>
@@ -265,7 +271,7 @@ JOIN author_detail ad ON pd.message_uid = ad.message_uid
 WHERE CAST(pd.message_uid AS TEXT) = CAST($id AS TEXT);
 
     SELECT 'html' AS component, '
-      <link rel="stylesheet" href="/assets/style.css">
+      <link rel="stylesheet" href="'||${this.absoluteURL("/assets/style.css")}||'">
       <table class="patient-details">
       <tr>
       <th class="no-border-bottom" style="background-color: #f2f2f2"><b>Document</b></th>
@@ -312,7 +318,7 @@ WHERE CAST(pd.message_uid AS TEXT) = CAST($id AS TEXT);
     WHERE CAST(message_uid AS TEXT)=CAST($id AS TEXT);
 
     SELECT 'html' AS component, '
-    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="'||${this.absoluteURL("/assets/style.css")}||'">
     <style>
       .patient-details {
         width: 100%;
@@ -379,7 +385,7 @@ WHERE CAST(pd.message_uid AS TEXT) = CAST($id AS TEXT);
 
 
   select 'html' as component;
-  select '<link rel="stylesheet" href="/assets/style.css">
+  select '<link rel="stylesheet" href="'||${this.absoluteURL("/assets/style.css")}||'">
     <details class="accordian-head">
   <summary>'||section_title||'</summary>
   <div class="patient-details">
@@ -392,12 +398,16 @@ WHERE CAST(pd.message_uid AS TEXT) = CAST($id AS TEXT);
   }
   @dmsNav({
     caption: "Dispatched",
-    description: "",
+    description: "Provides a list of messages dispatched",
     siblingOrder: 2,
   })
   "dms/dispatched.sql"() {
     return this.SQL`
       ${this.activePageTitle()}
+      select
+        'text'              as component,
+        'This page provides a list of messages dispatched using the sender module, detailing the sent messages and their associated information.' as contents;
+      
 
       SELECT 'table' as component,
             'subject' AS markdown,
@@ -409,12 +419,16 @@ WHERE CAST(pd.message_uid AS TEXT) = CAST($id AS TEXT);
 
   @dmsNav({
     caption: "Failed",
-    description: "",
+    description: "Provides a list of messages Failed",
     siblingOrder: 2,
   })
   "dms/failed.sql"() {
     return this.SQL`
       ${this.activePageTitle()}
+
+      select
+        'text'              as component,
+        'This page provides a list of messages that failed after being sent using the sender module, displaying details of each failed message.' as contents;
 
       SELECT 'table' as component,
             'subject' AS markdown,
@@ -435,7 +449,7 @@ export async function SQL() {
         );
       }
     }(),
-    new sh.ShellSqlPages(),
+    new sh.ShellSqlPages(WEB_UI_TITLE, WEB_UI_LOGO, WEB_UI_FAV),
     new c.ConsoleSqlPages(),
     new ur.UniformResourceSqlPages(),
     new orch.OrchestrationSqlPages(),

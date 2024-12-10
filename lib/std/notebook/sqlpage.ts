@@ -177,7 +177,6 @@ export function methodNameNavPath(
   methodName: string,
   isRoot = (path: string) => path === "/" ? true : false,
 ) {
-
   let path = methodName;
 
   // // special handling for path indexes so searches are easier in table
@@ -278,7 +277,7 @@ export function navigationPrimeTopLevel(
 ) {
   return navigationPrime({
     ...route,
-    parentPath: "/",
+    parentPath: "index.sql",
   });
 }
 
@@ -343,8 +342,9 @@ export class TypicalSqlPageNotebook
   readonly formattedSQL: boolean = true;
 
   absoluteURL(relativeURL: string) {
-    return `sqlpage.environment_variable('SQLPAGE_SITE_PREFIX')||'${relativeURL}'`;
+    return `sqlpage.environment_variable('SQLPAGE_SITE_PREFIX') || '${relativeURL}'`;
   }
+
   constructHomePath(parentPath: string) {
     return `'${parentPath}'||'/index.sql'`;
   }
@@ -484,6 +484,8 @@ export class TypicalSqlPageNotebook
       return undefined;
     }
 
+
+
     // Split the stack to find the method name
     const stackLines = stack.split("\n");
     if (stackLines.length < 3) {
@@ -509,9 +511,9 @@ export class TypicalSqlPageNotebook
     // assume methodName is now a proper sqlpage_files.path value
     return {
       methodName,
-      absPath: "/" + methodName,
+      absPath: methodName + '/index.sql',
       basename: path.basename(methodName),
-      path: "/" + path.dirname(methodName),
+      path: path.dirname(methodName) + '/index.sql',
       extension: path.extname(methodName),
     };
   }
@@ -524,6 +526,7 @@ export class TypicalSqlPageNotebook
       link?: string;
     })[]
   ) {
+
     // deno-fmt-ignore
     return ws.unindentWhitespace(`
         SELECT 'breadcrumb' as component;
@@ -534,7 +537,7 @@ export class TypicalSqlPageNotebook
                 parent_path, 0 AS level,
                 namespace
             FROM sqlpage_aide_navigation
-            WHERE namespace = 'prime' AND path = '${activePath.replaceAll("'", "''")}'
+            WHERE namespace = 'prime' AND path='${activePath.replaceAll("'", "''")}'
             UNION ALL
             SELECT
                 COALESCE(nav.abbreviated_caption, nav.caption) AS title,
@@ -543,11 +546,8 @@ export class TypicalSqlPageNotebook
             FROM sqlpage_aide_navigation nav
             INNER JOIN breadcrumbs b ON nav.namespace = b.namespace AND nav.path = b.parent_path
         )
-        SELECT title,
-        case when link='/' THEN ${this.absoluteURL('')} 
-        else       
-        ${this.absoluteURL('')} ||'/'|| replace(link,rtrim(link,replace(link,'/','')),'')
-        END AS link
+        SELECT title ,      
+        ${this.absoluteURL("/")}||link as link        
         FROM breadcrumbs ORDER BY level DESC;`) +
       (additional.length
         ? (additional.map((crumb) => `\nSELECT ${crumb.title ? `'${crumb.title}'` : crumb.titleExpr} AS title, '${crumb.link ?? "#"}' AS link;`))
@@ -603,7 +603,10 @@ export class TypicalSqlPageNotebook
     const methodName = activePPC?.methodName.replaceAll("'", "''") ?? "??";
     return this.SQL`
         SELECT 'text' AS component,
-       '[View ${methodName}](' || ${this.absoluteURL(`/console/sqlpage-files/sqlpage-file.sql?path=${methodName}`)} || ')' AS contents_md;       
+       '[View ${methodName}](' || ${this.absoluteURL(
+      `/console/sqlpage-files/sqlpage-file.sql?path=${methodName}`,
+    )
+      } || ')' AS contents_md;       
   `;
   }
 

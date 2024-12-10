@@ -35,7 +35,7 @@ FROM
 
 DROP TABLE IF EXISTS ur_transform_html_email_anchor_subscription_filter_chached;
 CREATE TABLE ur_transform_html_email_anchor_subscription_filter_chached AS
-SELECT
+SELECT 
     uniform_resource_transform_id,
     uniform_resource_id,
     anchor,
@@ -157,6 +157,7 @@ SELECT
     FROM ur_transform_html_email_anchor_http_cached eah,
         html_each(eah.html_body, 'link') AS h WHERE html_attr_get(h.html, 'link', 'rel')='canonical';
 
+
 -- This query creates the table `ur_transform_html_email_anchor_meta_cached` to cache metadata
 -- extracted from HTML documents retrieved from email anchor links. For each record:
 -- 1. `uniform_resource_transform_id` and `uniform_resource_id` track the resource identifiers.
@@ -179,6 +180,7 @@ SELECT
     FROM ur_transform_html_email_anchor_http_cached eah,
         html_each(eah.html_body, 'meta') AS h;
 
+
 -- This query creates the table `ur_transform_html_email_anchor_title_cached`, which caches
 -- the title of HTML documents retrieved from email anchor links. For each record:
 -- 1. `uniform_resource_transform_id` and `uniform_resource_id` are identifiers for tracking resources.
@@ -198,7 +200,6 @@ SELECT
         html_text(h.html,'title') as title
     FROM ur_transform_html_email_anchor_http_cached eah,
         html_each(eah.html_body, 'title') AS h;
-
 
 -- This query creates the 'ur_periodical_anchor_text_json_filter_cached' table by extracting and processing data from the 'anchor_text' field in the 'ur_transform_html_email_anchor_cached' table.
 -- Purpose:

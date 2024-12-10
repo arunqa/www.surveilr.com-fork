@@ -1,5 +1,10 @@
 # Stage 1: Build and Preparation
 FROM debian:latest AS builder
+ARG GITHUB_TOKEN
+ARG EG_SURVEILR_COM_IMAP_FOLDER
+ARG EG_SURVEILR_COM_IMAP_USER_NAME
+ARG EG_SURVEILR_COM_IMAP_PASS
+ARG EG_SURVEILR_COM_IMAP_HOST
 
 # Install necessary build tools and dependencies
 RUN apt-get update && apt-get install -y \
@@ -7,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     git \
     bash \
     unzip \
+    wget \
     file
 
 # Install Deno
@@ -16,6 +22,12 @@ RUN curl -fsSL https://deno.land/x/install/install.sh | sh && \
 # Install surveilr using the provided script
 WORKDIR /usr/local/bin
 RUN curl -sL https://raw.githubusercontent.com/opsfolio/releases.opsfolio.com/main/surveilr/install.sh | bash
+
+# Install SQLite package registry
+RUN curl -sS https://webi.sh/sqlpkg | bash
+ENV SURVEILR_SQLPKG=/root/.sqlpkg
+RUN ln -s /root/.local/bin/sqlpkg /usr/bin/sqlpkg
+ENV GITHUB_TOKEN=${GITHUB_TOKEN}
 
 # Clone the www.surveilr.com repository
 WORKDIR /app
@@ -28,17 +40,36 @@ RUN mkdir -p /rssd && \
 
 # Create an index tsv file with a header for RSSDs
 RUN /bin/bash -c 'echo -e "expose_endpoint\trelative_path\trssd_name\tport\tpackage_sql" > /rssd/index.tsv'
+
+# Find directories containing `eg.surveilr.com-prepare.ts`, prepare RSSDs dependencies
+RUN /bin/bash -c "RSSD_SRC_PATH=(\$(find /app/www.surveilr.com -type f -name 'eg.surveilr.com-prepare.ts' -exec dirname {} \;)) && \
+    for path in \"\${RSSD_SRC_PATH[@]}\"; do \
+      relative_path=\$(echo \"\$path\" | sed 's#/app/www.surveilr.com/##'); \
+      rssd_name=\$(echo \"\$relative_path\" | sed 's#/#-#g').sqlite.db; \
+      basename_path=\$(basename \"\$relative_path\"); \
+      cd \"\$path\" && \
+      mkdir -p /rssd/logs && \
+      if [ \"\$basename_path\" == \"site-quality-explorer\" ]; then \
+         deno run -A ./eg.surveilr.com-prepare.ts resourceName=surveilr.com rssdPath=/rssd/\$rssd_name > /rssd/logs/\$rssd_name.log 2>&1; \
+      elif [ \"\$basename_path\" == \"content-assembler\" ]; then \
+         echo -e \"IMAP_FOLDER=\${EG_SURVEILR_COM_IMAP_FOLDER}\\nIMAP_USER_NAME=\${EG_SURVEILR_COM_IMAP_USER_NAME}\\nIMAP_PASS=\${EG_SURVEILR_COM_IMAP_PASS}\\nIMAP_HOST=\${EG_SURVEILR_COM_IMAP_HOST}\" > .env; \
+         deno run -A ./eg.surveilr.com-prepare.ts rssdPath=/rssd/\$rssd_name > /rssd/logs/\$rssd_name.log 2>&1; \
+      else \
+         deno run -A ./eg.surveilr.com-prepare.ts rssdPath=/rssd/\$rssd_name > /rssd/logs/\$rssd_name.log 2>&1; \
+      fi; \
+    done"
+
 # Find directories containing `package.sql.ts`, build RSSDs, save in /rssd, and update index file with port number
 RUN /bin/bash -c "RSSD_SRC_PATH=(\$(find /app/www.surveilr.com -type f -name 'package.sql.ts' -exec dirname {} \;)) && \
     port=9000 && \
     for path in \"\${RSSD_SRC_PATH[@]}\"; do \
       # Convert path to a format suitable for the RSSD filename and get package_sql
-      relative_path=\$(echo \"\$path\" | sed 's#/app/www.surveilr.com/##; s/-//g'); \
+      relative_path=\$(echo \"\$path\" | sed 's#/app/www.surveilr.com/##'); \
       rssd_name=\$(echo \"\$relative_path\" | sed 's#/#-#g').sqlite.db; \
       package_sql=\"\${relative_path}/package.sql.ts\"; \
       cd \"\$path\" && \
       mkdir -p /rssd/logs && \
-      surveilr shell ./package.sql.ts -d /rssd/\$rssd_name > /rssd/logs/\$rssd_name.log 2>&1 && \
+      surveilr shell ./package.sql.ts -d /rssd/\$rssd_name >> /rssd/logs/\$rssd_name.log 2>&1 && \
       # Set expose_endpoint to 1 by default
       echo -e \"1\t\${relative_path}\t\${rssd_name}\t\${port}\t\${package_sql}\" >> /rssd/index.tsv; \
       port=\$((port+1)); \
@@ -62,15 +93,14 @@ COPY --from=builder /rssd /rssd
 # Expose the /rssd directory for external access and debugging
 VOLUME /rssd
 
+# Prepare the index.html for improved visuals and styling
+COPY support/deploy/rssd-index.html /rssd/index.html
+
 # Create the script for generating /rssd/index.html
 RUN echo '#!/bin/bash\n\
 \n\
 # Set output file for the generated HTML index\n\
 output_file="/rssd/index.html"\n\
-\n\
-# Extract the repository URL from the provenance file and add to HTML header\n\
-repo_url=$(awk -F"\t" "NR==2 {print \$2}" /rssd/provenance.tsv)\n\
-echo "<h1>RSSDs in ${repo_url}</h1><ul>" > "$output_file"\n\
 \n\
 # Process each line in the index file, starting from the second line\n\
 tail -n +2 /rssd/index.tsv | while IFS=$'"'"'\t'"'"' read -r expose_endpoint relative_path rssd_name port package_sql; do\n\
@@ -78,7 +108,7 @@ tail -n +2 /rssd/index.tsv | while IFS=$'"'"'\t'"'"' read -r expose_endpoint rel
 \n\
   if [ "$expose_endpoint" = "1" ]; then\n\
     # Add exposed endpoint links to the HTML\n\
-    echo "<li><a href=\"${full_path}\">${package_sql}</a></li>" >> "$output_file"\n\
+    echo "<li><a href=\"${full_path}\"><b>${package_sql}</b></a> <a href=\"https://github.com/surveilr/www.surveilr.com/tree/main${full_path}\">Source Code</a></li>" >> "$output_file"\n\
   else\n\
     # Add non-exposed RSSDs to the HTML\n\
     echo "<li>${package_sql} (not exposed)</li>" >> "$output_file"\n\
@@ -134,6 +164,9 @@ RUN echo '#!/bin/bash' > /start_application.sh && \
     echo 'nginx -g "daemon off;"' >> /start_application.sh && \
     /bin/bash /generate_rssd_index.sh && \
     chmod +x /start_application.sh
+
+# Update index.html for improved footer styling
+RUN /bin/bash -c 'echo -e "    </main>\n    <footer>\n   </footer>\n</body>\n</html>" >> /rssd/index.html'
 
 # CMD to run the start_application.sh script
 CMD ["/start_application.sh"]

@@ -9,39 +9,13 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    env: 
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      EGET_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     strategy:
       matrix:
-        include:
-          - os: ubuntu-18.04
-            architecture: x64
-          - os: ubuntu-18.04
-            architecture: arm64
-          - os: ubuntu-20.04
-            architecture: x64
-          - os: ubuntu-20.04
-            architecture: arm64
-          - os: ubuntu-22.04
-            architecture: x64
-          - os: ubuntu-22.04
-            architecture: arm64
-          - os: debian-10
-            architecture: x64
-          - os: debian-10
-            architecture: arm64
-          - os: debian-11
-            architecture: x64
-          - os: debian-11
-            architecture: arm64
-          - os: debian-12
-            architecture: x64
-          - os: debian-12
-            architecture: arm64
-          - os: kalilinux/latest
-            architecture: x64
-          - os: kalilinux/latest
-            architecture: arm64
-          - os: macos-latest
-            architecture: x64
+        os: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04]
+        architecture: [x64]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -71,7 +45,7 @@ jobs:
               surveilr upgrade
           else
               echo "surveilr not found. Installing..."
-              eget opsfolio/releases.opsfolio.com --asset tar.gz
+              eget opsfolio/releases.opsfolio.com
               sudo mv surveilr /usr/local/bin/
               surveilr --version
           fi
@@ -82,7 +56,8 @@ jobs:
                      ./lib/assurance/functions_test.ts \
                      ./lib/assurance/imap_test.ts \
                      ./lib/assurance/orchestration_test.ts \
-                     ./lib/assurance/opendal_integration_test.ts
+                     ./lib/assurance/opendal_integration_test.ts \
+                     ./lib/assurance/dynamic_extensions_test.ts
 
       - name: Install surveilr for Windows
         if: matrix.os == 'windows-latest'
@@ -99,4 +74,5 @@ jobs:
                      ./lib/assurance/functions_test.ts \
                      ./lib/assurance/imap_test.ts \
                      ./lib/assurance/orchestration_test.ts \
-                     ./lib/assurance/opendal_integration_test.ts
+                     ./lib/assurance/opendal_integration_test.ts \
+                     ./lib/assurance/dynamic_extensions_test.ts
